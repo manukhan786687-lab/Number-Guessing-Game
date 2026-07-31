@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guessing Game</title>
 
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎮 Number Guessing Game</h1>
+
+<div class="info">
+
+<p id="level">Level: 1</p>
+
+<p id="range">Guess Number (1 - 5)</p>
+
+<p id="lives">❤️ Lives: 3</p>
+
+<p id="score">⭐ Score: 0</p>
+
+<p id="highscore">🏆 High Score: 0</p>
+
+</div>
+
+<input
+type="number"
+id="guessInput"
+placeholder="Enter Number">
+
+<br><br>
+
+<button id="guessBtn">
+Guess
+</button>
+
+<button id="restartBtn">
+Restart Game
+</button>
+
+<p id="message">
+Good Luck!
+</p>
+
+<div id="winner" style="display:none;">
+<h2>🏆 Congratulations!</h2>
+<p>You Completed All 5 Levels.</p>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
