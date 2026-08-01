@@ -137,12 +137,15 @@ function startTimer(){
             lives--;
 
             livesText.innerHTML = "❤️ Lives: " + lives;
-
+             
             if(lives > 0){
-
+             clearInterval(timer);
+            startTimer();
+            }
+            if(lives > 0){
                 message.innerHTML = "⏰ Time Up! Try Again.";
 
-                startTimer();
+                
 
             }else{
 
