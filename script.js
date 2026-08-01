@@ -8,7 +8,7 @@ let score = 0;
 let highScore = localStorage.getItem("highScore") || 0;
 
 let randomNumber = random();
-
+startTimer();
 const levelText = document.getElementById("level");
 const rangeText = document.getElementById("range");
 const livesText = document.getElementById("lives");
@@ -40,7 +40,10 @@ function checkGuess(){
     if(guess === randomNumber){
 
         score += 10;
+        coins += 10;
+coinsText.innerHTML = "🪙 Coins: " + coins;
 
+clearInterval(timer);
         if(score > highScore){
             highScore = score;
             localStorage.setItem("highScore", highScore);
@@ -65,7 +68,7 @@ function checkGuess(){
         scoreText.innerHTML = "⭐ Score: " + score;
 
         message.innerHTML = "✅ Correct! Next Level";
-
+        startTimer();
     }else{
 
         lives--;
@@ -110,6 +113,7 @@ function restartGame(){
     document.getElementById("guessBtn").disabled = false;
 
     input.value = "";
+    startTimer();
 }
 function startTimer(){
 
