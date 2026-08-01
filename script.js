@@ -80,7 +80,7 @@ clearInterval(timer);
         }
 
         livesText.innerHTML = "❤️ Lives: " + lives;
-
+        startTimer();
         if(lives == 0){
             message.innerHTML =
             "💀 Game Over! Correct Number was " + randomNumber;
@@ -156,5 +156,6 @@ function startTimer(){
         }
 
     },1000);
-startTimer();
+
 }
+startTimer();
