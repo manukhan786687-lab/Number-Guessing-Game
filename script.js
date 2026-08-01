@@ -20,14 +20,14 @@ const winner = document.getElementById("winner");
 const timerText = document.getElementById("timer");
 const coinsText = document.getElementById("coins");
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
-startTimer();
+
 document.getElementById("guessBtn").addEventListener("click", checkGuess);
 document.getElementById("restartBtn").addEventListener("click", restartGame);
 
 function random(){
     return Math.floor(Math.random() * maxNumber) + 1;
 }
-
+startTimer();
 function checkGuess(){
 
     let guess = Number(input.value);
@@ -68,7 +68,7 @@ clearInterval(timer);
         scoreText.innerHTML = "⭐ Score: " + score;
 
         message.innerHTML = "✅ Correct! Next Level";
-        startTimer();
+        
     }else{
 
         lives--;
@@ -91,7 +91,7 @@ clearInterval(timer);
 
     input.value = "";
 }
-
+startTimer();
 function restartGame(){
 
     level = 1;
@@ -113,8 +113,9 @@ function restartGame(){
     document.getElementById("guessBtn").disabled = false;
 
     input.value = "";
-    startTimer();
+   
 }
+ startTimer();
 function startTimer(){
 
     clearInterval(timer);
@@ -141,7 +142,7 @@ function startTimer(){
 
                 message.innerHTML = "⏰ Time Up! Try Again.";
 
-                startTimer();
+                
 
             }else{
 
@@ -155,5 +156,5 @@ function startTimer(){
         }
 
     },1000);
-
+startTimer();
 }
