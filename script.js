@@ -111,3 +111,45 @@ function restartGame(){
 
     input.value = "";
 }
+function startTimer(){
+
+    clearInterval(timer);
+
+    timeLeft = 15;
+
+    timerText.innerHTML = "⏳ Time Left: " + timeLeft;
+
+    timer = setInterval(function(){
+
+        timeLeft--;
+
+        timerText.innerHTML = "⏳ Time Left: " + timeLeft;
+
+        if(timeLeft <= 0){
+
+            clearInterval(timer);
+
+            lives--;
+
+            livesText.innerHTML = "❤️ Lives: " + lives;
+
+            if(lives > 0){
+
+                message.innerHTML = "⏰ Time Up! Try Again.";
+
+                startTimer();
+
+            }else{
+
+                message.innerHTML =
+                "💀 Game Over! Correct Number was " + randomNumber;
+
+                document.getElementById("guessBtn").disabled = true;
+
+            }
+
+        }
+
+    },1000);
+
+}
