@@ -86,3 +86,15 @@ button{
     padding:15px;
     border-radius:12px;
 }
+#timer{
+    font-size:22px;
+    color:#FFD700;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+#coins{
+    font-size:20px;
+    color:#00FF7F;
+    font-weight:bold;
+}
