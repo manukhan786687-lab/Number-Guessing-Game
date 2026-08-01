@@ -8,7 +8,7 @@ let score = 0;
 let highScore = localStorage.getItem("highScore") || 0;
 
 let randomNumber = random();
-startTimer();
+
 const levelText = document.getElementById("level");
 const rangeText = document.getElementById("range");
 const livesText = document.getElementById("lives");
@@ -20,7 +20,7 @@ const winner = document.getElementById("winner");
 const timerText = document.getElementById("timer");
 const coinsText = document.getElementById("coins");
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
-
+startTimer();
 document.getElementById("guessBtn").addEventListener("click", checkGuess);
 document.getElementById("restartBtn").addEventListener("click", restartGame);
 
