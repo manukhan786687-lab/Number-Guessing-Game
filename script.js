@@ -1,58 +1,67 @@
-let coins = 0;
-let timeLeft = 15;
-let timer;
 let level = 1;
 let maxNumber = 5;
 let lives = 3;
 let score = 0;
-let highScore = localStorage.getItem("highScore") || 0;
+let coins = 0;
+let timeLeft = 15;
+let timer;
 
+let highScore = Number(localStorage.getItem("highScore")) || 0;
 let randomNumber = random();
 
 const levelText = document.getElementById("level");
 const rangeText = document.getElementById("range");
 const livesText = document.getElementById("lives");
 const scoreText = document.getElementById("score");
+const coinsText = document.getElementById("coins");
 const highScoreText = document.getElementById("highscore");
+const timerText = document.getElementById("timer");
 const input = document.getElementById("guessInput");
 const message = document.getElementById("message");
 const winner = document.getElementById("winner");
-const timerText = document.getElementById("timer");
-const coinsText = document.getElementById("coins");
+
+const guessBtn = document.getElementById("guessBtn");
+const restartBtn = document.getElementById("restartBtn");
+
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
+coinsText.innerHTML = "🪙 Coins: " + coins;
 
-document.getElementById("guessBtn").addEventListener("click", checkGuess);
-document.getElementById("restartBtn").addEventListener("click", restartGame);
+guessBtn.addEventListener("click", checkGuess);
+restartBtn.addEventListener("click", restartGame);
 
-function random(){
+function random() {
     return Math.floor(Math.random() * maxNumber) + 1;
 }
 
-function checkGuess(){
+function checkGuess() {
 
     let guess = Number(input.value);
 
-    if(guess < 1 || guess > maxNumber){
+    if (guess < 1 || guess > maxNumber) {
         message.innerHTML = "❌ Enter a number between 1 and " + maxNumber;
         return;
     }
 
-    if(guess === randomNumber){
+    clearInterval(timer);
+
+    if (guess === randomNumber) {
 
         score += 10;
         coins += 10;
-coinsText.innerHTML = "🪙 Coins: " + coins;
 
-clearInterval(timer);
-        if(score > highScore){
+        scoreText.innerHTML = "⭐ Score: " + score;
+        coinsText.innerHTML = "🪙 Coins: " + coins;
+
+        if (score > highScore) {
             highScore = score;
             localStorage.setItem("highScore", highScore);
             highScoreText.innerHTML = "🏆 High Score: " + highScore;
         }
 
-        if(level == 5){
+        if (level === 5) {
             winner.style.display = "block";
-            message.innerHTML = "🎉 You completed the game!";
+            message.innerHTML = "🏆 You completed all levels!";
+            guessBtn.disabled = true;
             return;
         }
 
@@ -65,39 +74,47 @@ clearInterval(timer);
         levelText.innerHTML = "Level: " + level;
         rangeText.innerHTML = "Guess Number (1 - " + maxNumber + ")";
         livesText.innerHTML = "❤️ Lives: " + lives;
-        scoreText.innerHTML = "⭐ Score: " + score;
 
         message.innerHTML = "✅ Correct! Next Level";
+
+        input.value = "";
+
         startTimer();
-    }else{
+
+    } else {
 
         lives--;
 
-        if(guess > randomNumber){
+        livesText.innerHTML = "❤️ Lives: " + lives;
+
+        if (guess > randomNumber) {
             message.innerHTML = "📉 Too High";
-        }else{
+        } else {
             message.innerHTML = "📈 Too Low";
         }
 
-        livesText.innerHTML = "❤️ Lives: " + lives;
-        startTimer();
-        if(lives == 0){
+        input.value = "";
+
+        if (lives <= 0) {
             message.innerHTML =
-            "💀 Game Over! Correct Number was " + randomNumber;
-
-            document.getElementById("guessBtn").disabled = true;
+                "💀 Game Over! Correct Number was " + randomNumber;
+            guessBtn.disabled = true;
+            return;
         }
+
+        startTimer();
     }
+}          
+function restartGame() {
 
-    input.value = "";
-}
-
-function restartGame(){
+    clearInterval(timer);
 
     level = 1;
     maxNumber = 5;
     lives = 3;
     score = 0;
+    coins = 0;
+    timeLeft = 15;
 
     randomNumber = random();
 
@@ -105,60 +122,53 @@ function restartGame(){
     rangeText.innerHTML = "Guess Number (1 - 5)";
     livesText.innerHTML = "❤️ Lives: 3";
     scoreText.innerHTML = "⭐ Score: 0";
+    coinsText.innerHTML = "🪙 Coins: 0";
     highScoreText.innerHTML = "🏆 High Score: " + highScore;
 
     message.innerHTML = "Good Luck!";
     winner.style.display = "none";
 
-    document.getElementById("guessBtn").disabled = false;
+    guessBtn.disabled = false;
 
     input.value = "";
-   startTimer();
+
+    startTimer();
 }
- 
-function startTimer(){
+
+function startTimer() {
 
     clearInterval(timer);
 
     timeLeft = 15;
-
     timerText.innerHTML = "⏳ Time Left: " + timeLeft;
 
-    timer = setInterval(function(){
+    timer = setInterval(function () {
 
         timeLeft--;
 
         timerText.innerHTML = "⏳ Time Left: " + timeLeft;
 
-        if(timeLeft <= 0){
+        if (timeLeft <= 0) {
 
             clearInterval(timer);
 
             lives--;
-
             livesText.innerHTML = "❤️ Lives: " + lives;
-             
-            if(lives > 0){
-             clearInterval(timer);
-            startTimer();
-            }
-            if(lives > 0){
-                message.innerHTML = "⏰ Time Up! Try Again.";
 
-                
-
-            }else{
+            if (lives <= 0) {
 
                 message.innerHTML =
-                "💀 Game Over! Correct Number was " + randomNumber;
+                    "💀 Game Over! Correct Number was " + randomNumber;
 
-                document.getElementById("guessBtn").disabled = true;
-
+                guessBtn.disabled = true;
+                return;
             }
 
+            message.innerHTML = "⏰ Time Up! Try Again!";
+            startTimer();
         }
 
-    },1000);
-
+    }, 1000);
 }
+
 startTimer();
