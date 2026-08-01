@@ -1,4 +1,6 @@
-
+let coins = 0;
+let timeLeft = 15;
+let timer;
 let level = 1;
 let maxNumber = 5;
 let lives = 3;
@@ -15,7 +17,8 @@ const highScoreText = document.getElementById("highscore");
 const input = document.getElementById("guessInput");
 const message = document.getElementById("message");
 const winner = document.getElementById("winner");
-
+const timerText = document.getElementById("timer");
+const coinsText = document.getElementById("coins");
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
 
 document.getElementById("guessBtn").addEventListener("click", checkGuess);
