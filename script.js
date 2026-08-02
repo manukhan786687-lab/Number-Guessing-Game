@@ -172,12 +172,12 @@ function startTimer() {
 }
 function useHint(){
 
-    if(coins < 50){
+    if(coins < 10){
         message.innerHTML = "❌ Not enough coins!";
         return;
     }
 
-    coins -= 50;
+    coins -= 10;
     coinsText.innerHTML = "🪙 Coins: " + coins;
 
     if(randomNumber % 2 === 0){
