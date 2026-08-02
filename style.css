@@ -98,3 +98,11 @@ button{
     color:#00FF7F;
     font-weight:bold;
 }
+#hintBtn{
+    background:#3b82f6;
+    color:white;
+}
+
+#hintBtn:hover{
+    background:#2563eb;
+}
