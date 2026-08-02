@@ -170,5 +170,21 @@ function startTimer() {
 
     }, 1000);
 }
+function useHint(){
 
+    if(coins < 50){
+        message.innerHTML = "❌ Not enough coins!";
+        return;
+    }
+
+    coins -= 50;
+    coinsText.innerHTML = "🪙 Coins: " + coins;
+
+    if(randomNumber % 2 === 0){
+        message.innerHTML = "💡 Hint: Number is EVEN";
+    }else{
+        message.innerHTML = "💡 Hint: Number is ODD";
+    }
+
+}
 startTimer();
