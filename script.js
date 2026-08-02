@@ -22,13 +22,13 @@ const winner = document.getElementById("winner");
 
 const guessBtn = document.getElementById("guessBtn");
 const restartBtn = document.getElementById("restartBtn");
-
+const hintBtn = document.getElementById("hintBtn");
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
 coinsText.innerHTML = "🪙 Coins: " + coins;
 
 guessBtn.addEventListener("click", checkGuess);
 restartBtn.addEventListener("click", restartGame);
-
+hintBtn.addEventListener("click", useHint);
 function random() {
     return Math.floor(Math.random() * maxNumber) + 1;
 }
