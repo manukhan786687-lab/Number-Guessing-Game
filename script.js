@@ -35,6 +35,8 @@ coinsText.innerHTML = "🪙 Coins: " + coins;
 guessBtn.addEventListener("click", checkGuess);
 restartBtn.addEventListener("click", restartGame);
 hintBtn.addEventListener("click", useHint);
+shopBtn.addEventListener("click", openShop);
+closeShop.addEventListener("click", closeShopMenu);
 function random() {
     return Math.floor(Math.random() * maxNumber) + 1;
 }
