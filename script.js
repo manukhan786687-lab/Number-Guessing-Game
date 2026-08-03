@@ -141,3 +141,65 @@ function restartGame() {
     input.value = "";
 
     start
+function startTimer() {
+
+    clearInterval(timer);
+
+    timeLeft = 15;
+    timerText.innerHTML = "⏳ Time Left: " + timeLeft;
+
+    timer = setInterval(function () {
+
+        timeLeft--;
+
+        timerText.innerHTML = "⏳ Time Left: " + timeLeft;
+
+        if (timeLeft <= 0) {
+
+            clearInterval(timer);
+
+            lives--;
+            livesText.innerHTML = "❤️ Lives: " + lives;
+
+            if (lives <= 0) {
+
+                message.innerHTML =
+                    "💀 Game Over! Correct Number was " + randomNumber;
+
+                guessBtn.disabled = true;
+                return;
+            }
+
+            message.innerHTML = "⏰ Time Up! Try Again!";
+            startTimer();
+        }
+
+    }, 1000);
+}
+
+function useHint() {
+
+    if (coins < 10) {
+        message.innerHTML = "❌ Not enough coins!";
+        return;
+    }
+
+    coins -= 10;
+    coinsText.innerHTML = "🪙 Coins: " + coins;
+
+    if (randomNumber % 2 === 0) {
+        message.innerHTML = "💡 Hint: Number is EVEN";
+    } else {
+        message.innerHTML = "💡 Hint: Number is ODD";
+    }
+}
+
+function openShop() {
+    shopOverlay.style.display = "flex";
+}
+
+function closeShopMenu() {
+    shopOverlay.style.display = "none";
+}
+
+startTimer();
