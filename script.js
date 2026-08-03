@@ -25,6 +25,7 @@ const restartBtn = document.getElementById("restartBtn");
 const hintBtn = document.getElementById("hintBtn");
 const shopBtn = document.getElementById("shopBtn");
 const shop = document.getElementById("shop");
+const shopOverlay = document.getElementById("shopOverlay");
 const closeShop = document.getElementById("closeShop");
 
 shopBtn.addEventListener("click", openShop);
@@ -197,13 +198,16 @@ function useHint(){
 }
 function openShop(){
 
-    shop.style.display = "block";
+    shopOverlay.style.display = "flex";
 
+}
 }
 
 function closeShopMenu(){
 
-    shop.style.display = "none";
+    shopOverlay.style.display = "none";
+
+}
 
 }
 startTimer();
