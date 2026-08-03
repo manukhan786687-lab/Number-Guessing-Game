@@ -1,4 +1,4 @@
-   let level = 1;
+let level = 1;
 let maxNumber = 5;
 let lives = 3;
 let score = 0;
@@ -24,12 +24,12 @@ const guessBtn = document.getElementById("guessBtn");
 const restartBtn = document.getElementById("restartBtn");
 const hintBtn = document.getElementById("hintBtn");
 const shopBtn = document.getElementById("shopBtn");
-const shop = document.getElementById("shop");
-const shopOverlay = document.getElementById("shopOverlay");
 const closeShop = document.getElementById("closeShop");
 
-highScoreText.innerHTML = "🏆 High Score: " + highScore;
-coinsText.innerHTML = "🪙 Coins: " + coins;
+const shopOverlay = document.getElementById("shopOverlay");
+
+highScoreText.textContent = "🏆 High Score: " + highScore;
+coinsText.textContent = "🪙 Coins: " + coins;
 
 guessBtn.addEventListener("click", checkGuess);
 restartBtn.addEventListener("click", restartGame);
@@ -39,13 +39,15 @@ closeShop.addEventListener("click", closeShopMenu);
 
 function random() {
     return Math.floor(Math.random() * maxNumber) + 1;
-} 
+}
+
 function checkGuess() {
 
     let guess = Number(input.value);
 
     if (guess < 1 || guess > maxNumber) {
-        message.innerHTML = "❌ Enter a number between 1 and " + maxNumber;
+        message.textContent =
+        "❌ Enter a number between 1 and " + maxNumber;
         return;
     }
 
@@ -56,19 +58,31 @@ function checkGuess() {
         score += 10;
         coins += 10;
 
-        scoreText.innerHTML = "⭐ Score: " + score;
-        coinsText.innerHTML = "🪙 Coins: " + coins;
+        scoreText.textContent = "⭐ Score: " + score;
+        coinsText.textContent = "🪙 Coins: " + coins;
 
         if (score > highScore) {
+
             highScore = score;
-            localStorage.setItem("highScore", highScore);
-            highScoreText.innerHTML = "🏆 High Score: " + highScore;
+
+            localStorage.setItem(
+                "highScore",
+                highScore
+            );
+
+            highScoreText.textContent =
+            "🏆 High Score: " + highScore;
         }
 
         if (level === 5) {
+
             winner.style.display = "block";
-            message.innerHTML = "🏆 You completed all levels!";
+
+            message.textContent =
+            "🏆 You completed all levels!";
+
             guessBtn.disabled = true;
+
             return;
         }
 
@@ -78,12 +92,20 @@ function checkGuess() {
 
         randomNumber = random();
 
-        levelText.innerHTML = "Level: " + level;
-        rangeText.innerHTML = "Guess Number (1 - " + maxNumber + ")";
-        livesText.innerHTML = "❤️ Lives: " + lives;
-        scoreText.innerHTML = "⭐ Score: " + score;
+        levelText.textContent =
+        "Level: " + level;
 
-        message.innerHTML = "✅ Correct! Next Level";
+        rangeText.textContent =
+        "Guess Number (1 - " + maxNumber + ")";
+
+        livesText.textContent =
+        "❤️ Lives: " + lives;
+
+        scoreText.textContent =
+        "⭐ Score: " + score;
+
+        message.textContent =
+        "✅ Correct! Next Level";
 
         input.value = "";
 
@@ -93,19 +115,30 @@ function checkGuess() {
 
         lives--;
 
-        livesText.innerHTML = "❤️ Lives: " + lives;
+        livesText.textContent =
+        "❤️ Lives: " + lives;
 
         if (guess > randomNumber) {
-            message.innerHTML = "📉 Too High";
+
+            message.textContent =
+            "📉 Too High";
+
         } else {
-            message.innerHTML = "📈 Too Low";
+
+            message.textContent =
+            "📈 Too Low";
+
         }
 
         input.value = "";
 
         if (lives <= 0) {
-            message.innerHTML = "💀 Game Over! Correct Number was " + randomNumber;
+
+            message.textContent =
+            "💀 Game Over! Correct Number was " + randomNumber;
+
             guessBtn.disabled = true;
+
             return;
         }
 
@@ -126,80 +159,105 @@ function restartGame() {
 
     randomNumber = random();
 
-    levelText.innerHTML = "Level: 1";
-    rangeText.innerHTML = "Guess Number (1 - 5)";
-    livesText.innerHTML = "❤️ Lives: 3";
-    scoreText.innerHTML = "⭐ Score: 0";
-    coinsText.innerHTML = "🪙 Coins: 0";
-    highScoreText.innerHTML = "🏆 High Score: " + highScore;
+    levelText.textContent = "Level: 1";
+    rangeText.textContent = "Guess Number (1 - 5)";
+    livesText.textContent = "❤️ Lives: 3";
+    scoreText.textContent = "⭐ Score: 0";
+    coinsText.textContent = "🪙 Coins: 0";
+    highScoreText.textContent =
+    "🏆 High Score: " + highScore;
 
-    message.innerHTML = "Good Luck!";
+    message.textContent = "Good Luck!";
+
     winner.style.display = "none";
 
     guessBtn.disabled = false;
 
     input.value = "";
 
-    start
+    startTimer();
+}
 function startTimer() {
 
     clearInterval(timer);
 
     timeLeft = 15;
-    timerText.innerHTML = "⏳ Time Left: " + timeLeft;
+    timerText.textContent = "⏳ Time Left: " + timeLeft;
 
     timer = setInterval(function () {
 
         timeLeft--;
 
-        timerText.innerHTML = "⏳ Time Left: " + timeLeft;
+        timerText.textContent = "⏳ Time Left: " + timeLeft;
 
         if (timeLeft <= 0) {
 
             clearInterval(timer);
 
             lives--;
-            livesText.innerHTML = "❤️ Lives: " + lives;
+
+            livesText.textContent =
+            "❤️ Lives: " + lives;
 
             if (lives <= 0) {
 
-                message.innerHTML =
-                    "💀 Game Over! Correct Number was " + randomNumber;
+                message.textContent =
+                "💀 Game Over! Correct Number was " + randomNumber;
 
                 guessBtn.disabled = true;
+
                 return;
             }
 
-            message.innerHTML = "⏰ Time Up! Try Again!";
+            message.textContent =
+            "⏰ Time Up! Try Again!";
+
             startTimer();
         }
 
     }, 1000);
+
 }
 
 function useHint() {
 
     if (coins < 10) {
-        message.innerHTML = "❌ Not enough coins!";
+
+        message.textContent =
+        "❌ Not enough Coins!";
+
         return;
     }
 
     coins -= 10;
-    coinsText.innerHTML = "🪙 Coins: " + coins;
+
+    coinsText.textContent =
+    "🪙 Coins: " + coins;
 
     if (randomNumber % 2 === 0) {
-        message.innerHTML = "💡 Hint: Number is EVEN";
+
+        message.textContent =
+        "💡 Hint: Number is EVEN";
+
     } else {
-        message.innerHTML = "💡 Hint: Number is ODD";
+
+        message.textContent =
+        "💡 Hint: Number is ODD";
+
     }
+
 }
 
 function openShop() {
+
     shopOverlay.style.display = "flex";
+
 }
 
 function closeShopMenu() {
+
     shopOverlay.style.display = "none";
+
 }
 
 startTimer();
