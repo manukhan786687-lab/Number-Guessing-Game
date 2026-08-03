@@ -1,4 +1,4 @@
-let level = 1;
+   let level = 1;
 let maxNumber = 5;
 let lives = 3;
 let score = 0;
@@ -28,8 +28,6 @@ const shop = document.getElementById("shop");
 const shopOverlay = document.getElementById("shopOverlay");
 const closeShop = document.getElementById("closeShop");
 
-shopBtn.addEventListener("click", openShop);
-closeShop.addEventListener("click", closeShopMenu);
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
 coinsText.innerHTML = "🪙 Coins: " + coins;
 
@@ -38,10 +36,10 @@ restartBtn.addEventListener("click", restartGame);
 hintBtn.addEventListener("click", useHint);
 shopBtn.addEventListener("click", openShop);
 closeShop.addEventListener("click", closeShopMenu);
+
 function random() {
     return Math.floor(Math.random() * maxNumber) + 1;
-}
-
+} 
 function checkGuess() {
 
     let guess = Number(input.value);
@@ -83,6 +81,7 @@ function checkGuess() {
         levelText.innerHTML = "Level: " + level;
         rangeText.innerHTML = "Guess Number (1 - " + maxNumber + ")";
         livesText.innerHTML = "❤️ Lives: " + lives;
+        scoreText.innerHTML = "⭐ Score: " + score;
 
         message.innerHTML = "✅ Correct! Next Level";
 
@@ -105,15 +104,15 @@ function checkGuess() {
         input.value = "";
 
         if (lives <= 0) {
-            message.innerHTML =
-                "💀 Game Over! Correct Number was " + randomNumber;
+            message.innerHTML = "💀 Game Over! Correct Number was " + randomNumber;
             guessBtn.disabled = true;
             return;
         }
 
         startTimer();
     }
-}          
+}
+
 function restartGame() {
 
     clearInterval(timer);
@@ -141,73 +140,4 @@ function restartGame() {
 
     input.value = "";
 
-    startTimer();
-}
-
-function startTimer() {
-
-    clearInterval(timer);
-
-    timeLeft = 15;
-    timerText.innerHTML = "⏳ Time Left: " + timeLeft;
-
-    timer = setInterval(function () {
-
-        timeLeft--;
-
-        timerText.innerHTML = "⏳ Time Left: " + timeLeft;
-
-        if (timeLeft <= 0) {
-
-            clearInterval(timer);
-
-            lives--;
-            livesText.innerHTML = "❤️ Lives: " + lives;
-
-            if (lives <= 0) {
-
-                message.innerHTML =
-                    "💀 Game Over! Correct Number was " + randomNumber;
-
-                guessBtn.disabled = true;
-                return;
-            }
-
-            message.innerHTML = "⏰ Time Up! Try Again!";
-            startTimer();
-        }
-
-    }, 1000);
-}
-function useHint(){
-
-    if(coins < 10){
-        message.innerHTML = "❌ Not enough coins!";
-        return;
-    }
-
-    coins -= 10;
-    coinsText.innerHTML = "🪙 Coins: " + coins;
-
-    if(randomNumber % 2 === 0){
-        message.innerHTML = "💡 Hint: Number is EVEN";
-    }else{
-        message.innerHTML = "💡 Hint: Number is ODD";
-    }
-
-}
-function openShop(){
-
-    shopOverlay.style.display = "flex";
-
-}
-}
-
-function closeShopMenu(){
-
-    shopOverlay.style.display = "none";
-
-}
-
-}
-startTimer();
+    start
