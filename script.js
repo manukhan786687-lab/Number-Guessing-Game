@@ -23,6 +23,12 @@ const winner = document.getElementById("winner");
 const guessBtn = document.getElementById("guessBtn");
 const restartBtn = document.getElementById("restartBtn");
 const hintBtn = document.getElementById("hintBtn");
+const shopBtn = document.getElementById("shopBtn");
+const shop = document.getElementById("shop");
+const closeShop = document.getElementById("closeShop");
+
+shopBtn.addEventListener("click", openShop);
+closeShop.addEventListener("click", closeShopMenu);
 highScoreText.innerHTML = "🏆 High Score: " + highScore;
 coinsText.innerHTML = "🪙 Coins: " + coins;
 
@@ -185,6 +191,17 @@ function useHint(){
     }else{
         message.innerHTML = "💡 Hint: Number is ODD";
     }
+
+}
+function openShop(){
+
+    shop.style.display = "block";
+
+}
+
+function closeShopMenu(){
+
+    shop.style.display = "none";
 
 }
 startTimer();
