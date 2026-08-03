@@ -12,81 +12,71 @@
 
 <div class="container">
 
-<h1>🎮 Number Guessing Game</h1>
+    <h1>🎮 Number Guessing Game</h1>
 
-<p id="timer">⏳ Time Left: 15</p>
+    <p id="timer">⏳ Time Left: 15</p>
 
-<div class="info">
-<p id="level">Level: 1</p>
-<p id="range">Guess Number (1 - 5)</p>
-<p id="lives">❤️ Lives: 3</p>
-<p id="score">⭐ Score: 0</p>
-<p id="coins">🪙 Coins: 0</p>
-<p id="highscore">🏆 High Score: 0</p>
-</div>
+    <div class="info">
+        <p id="level">Level: 1</p>
+        <p id="range">Guess Number (1 - 5)</p>
+        <p id="lives">❤️ Lives: 3</p>
+        <p id="score">⭐ Score: 0</p>
+        <p id="coins">🪙 Coins: 0</p>
+        <p id="highscore">🏆 High Score: 0</p>
+    </div>
 
-<input
-type="number"
-id="guessInput"
-placeholder="Enter Number">
+    <input
+        type="number"
+        id="guessInput"
+        placeholder="Enter Number">
 
-<br><br>
+    <br><br>
 
-<button id="guessBtn">
-Guess
-</button>
+    <button id="guessBtn">🎯 Guess</button>
 
-<button id="restartBtn">
-Restart Game
-</button>
+    <button id="restartBtn">🔄 Restart Game</button>
 
-<button id="shopBtn">
-🛒 Shop
-</button>
+    <button id="hintBtn">💡 Hint (10 Coins)</button>
 
-<button id="hintBtn">
-💡 Hint (10 Coins)
-</button>
+    <button id="shopBtn">🛒 Shop</button>
 
-<p id="message">
-Good Luck!
-</p>
+    <p id="message">Good Luck!</p>
 
-<div id="winner" style="display:none;">
-<h2>🏆 Congratulations!</h2>
-<p>You Completed All 5 Levels.</p>
-</div>
-
-<!-- Shop Popup -->
-<div id="shopOverlay" style="display:none;">
-
-<div id="shop">
-
-<h2>🛒 Game Shop</h2>
-
-<button id="buyLife">
-❤️ Extra Life (30 Coins)
-</button>
-
-<button id="buyTime">
-⏳ +10 Seconds (20 Coins)
-</button>
-
-<button id="buySkip">
-⏭️ Skip Level (100 Coins)
-</button>
-
-<button id="buyShield">
-🛡️ Shield (75 Coins)
-</button>
-
-<button id="closeShop">
-❌ Close
-</button>
+    <div id="winner" style="display:none;">
+        <h2>🏆 Congratulations!</h2>
+        <p>You Completed All 5 Levels.</p>
+    </div>
 
 </div>
 
-</div>
+<!-- SHOP POPUP -->
+<div id="shopOverlay">
+
+    <div id="shop">
+
+        <h2>🛒 Game Shop</h2>
+
+        <button id="buyLife">
+            ❤️ Extra Life (30 Coins)
+        </button>
+
+        <button id="buyTime">
+            ⏳ +10 Seconds (20 Coins)
+        </button>
+
+        <button id="buySkip">
+            ⏭️ Skip Level (100 Coins)
+        </button>
+
+        <button id="buyShield">
+            🛡️ Shield (75 Coins)
+        </button>
+
+        <button id="closeShop">
+            ❌ Close
+        </button>
+
+    </div>
 
 </div>
 
