@@ -114,3 +114,53 @@ button{
 #shopBtn:hover{
     background:#d97706;
 }
+#shopOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+#shop{
+    width: 90%;
+    max-width: 350px;
+
+    background: #1f2937;
+    color: white;
+
+    padding: 20px;
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow: 0 0 25px rgba(0,0,0,.5);
+
+    animation: popup .25s ease;
+}
+
+#shop button{
+    width: 100%;
+    margin: 10px 0;
+}
+
+@keyframes popup{
+
+    from{
+        transform: scale(.7);
+        opacity: 0;
+    }
+
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
