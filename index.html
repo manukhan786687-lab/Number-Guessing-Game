@@ -1,86 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Number Guessing Game</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Galaxy Guess | Number Guessing Game</title>
 
-<link rel="stylesheet" href="style.css">
+<!-- Futuristic font (falls back to system font if offline) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<div class="container">
+  <!-- ===================== ANIMATED SPACE BACKGROUND ===================== -->
+  <div id="space-bg">
+    <div id="stars-container"></div>
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+    <div class="planet planet-3"></div>
+    <div id="meteor-container"></div>
+  </div>
 
-    <h1>🎮 Number Guessing Game</h1>
-
-    <p id="timer">⏳ Time Left: 15</p>
-
-    <div class="info">
-        <p id="level">Level: 1</p>
-        <p id="range">Guess Number (1 - 5)</p>
-        <p id="lives">❤️ Lives: 3</p>
-        <p id="score">⭐ Score: 0</p>
-        <p id="coins">🪙 Coins: 0</p>
-        <p id="highscore">🏆 High Score: 0</p>
+  <!-- ===================== TOP STATUS BAR ===================== -->
+  <header class="hud">
+    <div class="hud-item level-badge">
+      <span class="hud-label">LEVEL</span>
+      <span id="levelValue">1</span>/5
     </div>
 
-    <input
-        type="number"
-        id="guessInput"
-        placeholder="Enter Number">
-
-    <br><br>
-
-    <button id="guessBtn">🎯 Guess</button>
-
-    <button id="restartBtn">🔄 Restart Game</button>
-
-    <button id="hintBtn">💡 Hint (10 Coins)</button>
-
-    <button id="shopBtn">🛒 Shop</button>
-
-    <p id="message">Good Luck!</p>
-
-    <div id="winner" style="display:none;">
-        <h2>🏆 Congratulations!</h2>
-        <p>You Completed All 5 Levels.</p>
+    <div class="hud-item lives-box" id="livesBox">
+      <!-- Hearts injected by JS -->
     </div>
 
-</div>
-
-<!-- SHOP POPUP -->
-<div id="shopOverlay">
-
-    <div id="shop">
-
-        <h2>🛒 Game Shop</h2>
-
-        <button id="buyLife">
-            ❤️ Extra Life (30 Coins)
-        </button>
-
-        <button id="buyTime">
-            ⏳ +10 Seconds (20 Coins)
-        </button>
-
-        <button id="buySkip">
-            ⏭️ Skip Level (100 Coins)
-        </button>
-
-        <button id="buyShield">
-            🛡️ Shield (75 Coins)
-        </button>
-
-        <button id="closeShop">
-            ❌ Close
-        </button>
-
+    <div class="hud-item score-box">
+      <span class="hud-icon">⭐</span>
+      <span id="scoreValue">0</span>
     </div>
 
-</div>
+    <div class="hud-item coin-box" id="coinBox">
+      <span class="hud-icon">🪙</span>
+      <span id="coinValue">0</span>
+    </div>
+  </header>
 
-<script src="script.js"></script>
+  <div class="highscore-strip">
+    🏆 High Score: <span id="highScoreValue">0</span>
+  </div>
 
+  <!-- ===================== MAIN GAME CARD ===================== -->
+  <main class="game-wrapper">
+    <section class="game-card" id="gameCard">
+
+      <h1 class="title">GALAXY GUESS</h1>
+      <p class="subtitle" id="rangeText">Guess a number between 1 and 5</p>
+
+      <!-- Timer -->
+      <div class="timer-wrap">
+        <div class="timer-bar-bg">
+          <div class="timer-bar-fill" id="timerBarFill"></div>
+        </div>
+        <span class="timer-text" id="timerText">15s</span>
+      </div>
+
+      <!-- Guess Input -->
+      <div class="input-row">
+        <input
+          type="number"
+          id="guessInput"
+          class="guess-input"
+          placeholder="Enter your guess"
+          inputmode="numeric"
+        />
+        <button class="btn btn-primary" id="guessBtn">GUESS</button>
+      </div>
+
+      <!-- Feedback message -->
+      <p class="feedback" id="feedbackText">Enter a number and hit guess to begin!</p>
+      <p class="hint-text" id="hintText"></p>
+
+      <!-- Action buttons -->
+      <div class="action-row">
+        <button class="btn btn-secondary" id="hintBtn">💡 Hint <span class="cost-tag">-10🪙</span></button>
+        <button class="btn btn-secondary" id="shopBtn">🛒 Shop</button>
+        <button class="btn btn-danger" id="restartBtn">🔄 Restart</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== SHOP MODAL ===================== -->
+  <div class="modal-overlay" id="shopOverlay">
+    <div class="modal-box shop-box">
+      <button class="modal-close" id="closeShopBtn">✕</button>
+      <h2 class="modal-title">🛒 GALAXY SHOP</h2>
+      <p class="modal-sub">Your coins: <span id="shopCoinValue">0</span> 🪙</p>
+
+      <div class="shop-list">
+        <div class="shop-item">
+          <div class="shop-item-info">
+            <span class="shop-item-icon">❤️</span>
+            <div>
+              <p class="shop-item-name">Extra Life</p>
+              <p class="shop-item-price">30 🪙</p>
+            </div>
+          </div>
+          <button class="btn btn-buy" data-item="life">BUY</button>
+        </div>
+
+        <div class="shop-item">
+          <div class="shop-item-info">
+            <span class="shop-item-icon">⏳</span>
+            <div>
+              <p class="shop-item-name">+10 Seconds</p>
+              <p class="shop-item-price">20 🪙</p>
+            </div>
+          </div>
+          <button class="btn btn-buy" data-item="time">BUY</button>
+        </div>
+
+        <div class="shop-item">
+          <div class="shop-item-info">
+            <span class="shop-item-icon">⏭</span>
+            <div>
+              <p class="shop-item-name">Skip Level</p>
+              <p class="shop-item-price">100 🪙</p>
+            </div>
+          </div>
+          <button class="btn btn-buy" data-item="skip">BUY</button>
+        </div>
+
+        <div class="shop-item">
+          <div class="shop-item-info">
+            <span class="shop-item-icon">🛡</span>
+            <div>
+              <p class="shop-item-name">Shield</p>
+              <p class="shop-item-price">75 🪙</p>
+            </div>
+          </div>
+          <button class="btn btn-buy" data-item="shield">BUY</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== GAME OVER MODAL ===================== -->
+  <div class="modal-overlay" id="gameOverOverlay">
+    <div class="modal-box result-box">
+      <h2 class="modal-title danger-text">💀 GAME OVER</h2>
+      <p class="modal-sub">The galaxy got the better of you this time.</p>
+      <div class="result-stats">
+        <p>Final Score: <span id="finalScoreValue">0</span></p>
+        <p>Coins Earned: <span id="finalCoinValue">0</span></p>
+        <p>High Score: <span id="finalHighScoreValue">0</span></p>
+      </div>
+      <button class="btn btn-primary" id="gameOverRestartBtn">🔄 PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- ===================== WINNER MODAL ===================== -->
+  <div class="modal-overlay" id="winOverlay">
+    <div class="modal-box result-box win-box">
+      <h2 class="modal-title win-text">🏆 CONGRATULATIONS!</h2>
+      <p class="modal-sub">You Completed All Levels!</p>
+      <div class="result-stats">
+        <p>Final Score: <span id="winScoreValue">0</span></p>
+        <p>Total Coins: <span id="winCoinValue">0</span></p>
+        <p>High Score: <span id="winHighScoreValue">0</span></p>
+      </div>
+      <button class="btn btn-primary" id="winRestartBtn">🔄 PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Confetti / flying-heart / coin-fx layers -->
+  <div id="confetti-container"></div>
+  <div id="fx-container"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
